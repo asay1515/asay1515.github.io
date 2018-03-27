@@ -38,6 +38,7 @@ function startGame() {
 }
 
 var myGameArea = {
+ canvas : document.getElementById("canvas"),
     start : function() {
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
