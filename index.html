@@ -46,6 +46,9 @@ var myGameArea = {
         },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+  stop : function() {
+        clearInterval(this.interval);
     }
 }
 
@@ -104,9 +107,15 @@ function component(width, height, color, x, y, type) {
 function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < myObstacles.length; i += 1) {
-        if (myGamePiece.crashWith(myObstacles[i])) {
-            return;
-        } 
+        if (myGamePiece.crashWith(myObstacles)) {
+           myGameArea.stop();
+        } else {
+        
+         myGameArea.clear();
+        myObstacle.update();
+        myGamePiece.newPos(); 
+        myGamePiece.update();
+        }
     }
     myGameArea.clear();
     myGameArea.frameNo += 1;
