@@ -12,7 +12,6 @@ canvas {
  <h2><center>Моя страница</center></h2>
  <button onmousedown="startGame()">Начать игру</button> <br>
  <br>
- <canvas id="canvas" width="480" height="270">
  <h2>Нажми на кнопку чтобы взлететь<h2><br>
 <button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">Летим!!!</button>
 
@@ -36,10 +35,12 @@ function startGame() {
 }
 
 var myGameArea = {
- canvas : document.getElementById("canvas"),
+    canvas : document.createElement("canvas"),
     start : function() {
         this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+             this.canvas.width = 480;
+        this.canvas.height = 270;
+        document.body.insertBefore(this.canvas, document.body.childNodes[1]);
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, 20);
         },
