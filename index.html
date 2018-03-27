@@ -111,13 +111,13 @@ function updateGameArea() {
     for (i = 0; i < myObstacles.length; i += 1) {
         if (myGamePiece.crashWith(myObstacles)) {
            myGameArea.stop();
-        } else {
+        }
         
          myGameArea.clear();
         myObstacle.update();
         myGamePiece.newPos(); 
         myGamePiece.update();
-        }
+       
     }
     myGameArea.clear();
     myGameArea.frameNo += 1;
