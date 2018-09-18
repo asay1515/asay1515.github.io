@@ -1,0 +1,27 @@
+<html>
+<head>
+
+    <?php
+        if (isset($_GET['comment-unput']))
+    ?>
+
+    <title>Цензор-бот</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <?php $db = mysqli_connect('localhost', 'mihopol', 'mihpol', 'Censor-bot') or die(mysqli_error($db)); ?>
+    <script src="jquery-1.11.3.min.js"></script>
+</head>
+<body>
+    <div style="color: #d00; font-size: 21px; margin: 1em 0 0 2em;">Напишите комментарий:</div>
+    <div class="comment-form">
+        Имя: <input type="text" class="name-input"><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea class="comment-input"></textarea><br>
+            <input value="OK" type="submit" class="input-submit"/>
+    </div>
+    <div class="message"></div>
+    <br>
+    <div class="comments">
+        <?php require('show-comments.php'); ?>
+    </div>
+    <script src="functions.js"></script>
+</body>
+</html>
