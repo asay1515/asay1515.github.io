@@ -56,9 +56,41 @@ these make the slideshow work
 
 
 /*
-non-essential styles:
-just for appearance; change whatever you want
+essential styles:
+these make the slideshow work
 */
+#slides{
+	position: relative;
+	height: 300px;
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+
+.slide{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	z-index: 1;
+
+	-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	-o-transition: opacity 1s;
+	transition: opacity 1s;
+}
+
+.showing{
+	opacity: 1;
+	z-index: 2;
+}
+
+
+.controls{
+	display: none;
+}
 
 .slide{
 	font-size: 40px;
@@ -66,34 +98,56 @@ just for appearance; change whatever you want
 	box-sizing: border-box;
 	background: #333;
 	color: #fff;
+  
+  background-size: cover;
 }
-
 .slide:nth-of-type(1){
-	background: red;
+	background-color: blue;
+  background-image: url ('https://asay1515.github.io/slides/01.JPG');
 }
 .slide:nth-of-type(2){
-	background: orange;
+	background-color: orange;
+  background-image: url('https://asay1515.github.io/slides/02.JPG');
 }
 .slide:nth-of-type(3){
-	background: green;
+	background-color: green;
+  background-image: url('https://asay1515.github.io/slides/03.JPG');
 }
-.slide:nth-of-type(4){
-	background: blue;
+.controls{
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 20px 0px;
+  font-size: 20px;
+  cursor: pointer;
+  border: 2px solid #fff;
+  margin: 10px 0px 0px 10px;
+  width: 70px;
 }
-.slide:nth-of-type(5){
-	background: purple;
+.controls:hover,
+.controls:focus{
+  background: #eee;
+  color: #333;
+}
+.container{
+  position: relative;
+}
+.buttons{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 10;
+  font-size: 0px;
 }
 </style>
 <body>
  <h1><center>Моя страница-отчет</center></h1>
-
  <br>
 
 <div align="right">
   <h4>Дисциплина: Интернет-технологии</h4>
   <h4>Студент: Шуленина А.В.</h4>
   <h4>Группа: ИДМ-18-04</h4>
-  
  </div>
  
 <div width=50% align="left">
@@ -119,50 +173,93 @@ just for appearance; change whatever you want
    <li>Сформировать команду для разработки проекта;</li>
    <li>Определить роли команды;</li>
    <li>Разработать прототип приложения.</li>
- </ol>
+	</ol>
+	 <h4>Выполнение:</h4>
+	 <ol>
+<li>Команда была сформирована из трех человек: <a href="">Яцунь Инна</a>,<a href="">Матвеев Антон</a> и <a href="">Шуленина Анастасия.</a></li>
+		 <li>Коллективным решением было придумано название команды "НеСуперБобры".</li>
+		 <li>По результатам теста Белбина я коллективист, но в условиях нашей команды мне пришлось испольнять роль программиста системного и прикладного. Матвеев занимался управлением проектами, а Яцунь администрированием и бизнес анализом</li>
+		 <li>По окончанию командной работы был создан проект <a href="asay1515.github.io/progect/index.html">"Цензор-бот"</a></li>
+		 <li></li>
+	 </ol>
+ 
   <h1>Лабораторная работа 3</h1>
  <ol>
   <h4>Выполнение:</h4>
+ <div class="container">
   <ul id="slides">
-	<li class="slide showing">Slide 1</li>
-	<li class="slide">Slide 2</li>
-	<li class="slide">Slide 3</li>
-	<li class="slide">Slide 4</li>
-	<li class="slide">Slide 5</li>
-</ul>
-	 <button class="controls" id="pause">Pause</button>
+    <li class="slide showing"></li>
+    <li class="slide"></li>
+    <li class="slide"></li>
+  </ul>
+  <div class="buttons">
+    <button class="controls" id="previous">&lt;</button>
+
+    <button class="controls" id="pause">&#10074;&#10074;</button>
+
+    <button class="controls" id="next">&gt;</button>
+  </div>
+</div>
+	
    <li></li>
   
  </ol>
  
 <script type="text/javascript">
- var slides = document.querySelectorAll('#slides .slide');
+var controls = document.querySelectorAll('.controls');
+for(var i=0; i<controls.length; i++){
+	controls[i].style.display = 'inline-block';
+}
+
+var slides = document.querySelectorAll('#slides .slide');
 var currentSlide = 0;
 var slideInterval = setInterval(nextSlide,2000);
 
 function nextSlide(){
+	goToSlide(currentSlide+1);
+}
+
+function previousSlide(){
+	goToSlide(currentSlide-1);
+}
+
+function goToSlide(n){
 	slides[currentSlide].className = 'slide';
-	currentSlide = (currentSlide+1)%slides.length;
+	currentSlide = (n+slides.length)%slides.length;
 	slides[currentSlide].className = 'slide showing';
 }
-	var playing = true;
+
+
+var playing = true;
 var pauseButton = document.getElementById('pause');
-function pauseSlideshow() {
-    pauseButton.innerHTML = 'Play';
-    playing = false;
-    clearInterval(slideInterval);
+
+function pauseSlideshow(){
+	pauseButton.innerHTML = '&#9658;'; // play character
+	playing = false;
+	clearInterval(slideInterval);
 }
-function playSlideshow() {
-    pauseButton.innerHTML = 'Pause';
-    playing = true;
-    slideInterval = setInterval(nextSlide,2000);
+
+function playSlideshow(){
+	pauseButton.innerHTML = '&#10074;&#10074;'; // pause character
+	playing = true;
+	slideInterval = setInterval(nextSlide,2000);
 }
-pauseButton.onclick = function() {
-    if(playing) {
-    pauseSlideshow();
-  } else {
-    playSlideshow();
-  }
+
+pauseButton.onclick = function(){
+	if(playing){ pauseSlideshow(); }
+	else{ playSlideshow(); }
+};
+
+var next = document.getElementById('next');
+var previous = document.getElementById('previous');
+
+next.onclick = function(){
+	pauseSlideshow();
+	nextSlide();
+};
+previous.onclick = function(){
+	pauseSlideshow();
+	previousSlide();
 };
  </script>
 
