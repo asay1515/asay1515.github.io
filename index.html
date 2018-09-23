@@ -130,6 +130,7 @@ just for appearance; change whatever you want
 	<li class="slide">Slide 4</li>
 	<li class="slide">Slide 5</li>
 </ul>
+	 <button class="controls" id="pause">Pause</button>
    <li></li>
   
  </ol>
@@ -144,6 +145,25 @@ function nextSlide(){
 	currentSlide = (currentSlide+1)%slides.length;
 	slides[currentSlide].className = 'slide showing';
 }
+	var playing = true;
+var pauseButton = document.getElementById('pause');
+function pauseSlideshow() {
+    pauseButton.innerHTML = 'Play';
+    playing = false;
+    clearInterval(slideInterval);
+}
+function playSlideshow() {
+    pauseButton.innerHTML = 'Pause';
+    playing = true;
+    slideInterval = setInterval(nextSlide,2000);
+}
+pauseButton.onclick = function() {
+    if(playing) {
+    pauseSlideshow();
+  } else {
+    playSlideshow();
+  }
+};
  </script>
 
 
