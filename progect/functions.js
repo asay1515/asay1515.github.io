@@ -5,17 +5,10 @@ var main = function() {
 
     var censor = false;
     var ban = false;
+	var flag = true;
 
-    $.ajax({
-        url: "check_ban.php",
-        async: false,
-        type: "POST",
-        success: function (html) {
-            if (html=='1'){
-                ban = true;
-            }
-        }
-    });
+	var mat =["х**","х*й","охреневший","ебанутый"];
+//организовать проверку на бан
 
     $('body').on('click', '.input-submit', function () {
         if (ban) {
@@ -29,63 +22,30 @@ var main = function() {
             var name = $('.name-input').val();
             var comment = $('.comment-input').val();
             var date;
-
-            $.ajax({
-                url: "check_mat.php",
-                async: false,
-                type: "POST",
-                data: {name: name, comment: comment},
-                success: function (html) {
-                    if (html.indexOf('1') + 1) {
-                        $.ajax({
-                            url: "new_breach.php",
-                            async: false,
-                            type: "POST",
-                            success: function (data) {
-                                if (data=='1'){
-                                    location.reload();
-                                }
-                            }
-                        });
-                        censor = true;
-                        $('.message').prepend('&nbsp;&nbsp;В тексте вашего комментария замечены внешние ссылки. Любые внешние ссылки считаются попыткой рассылки спама.<br>' +
+			
+           		for (i=0;i<mat.length;i++)
+			{
+				if (name==mat[i])
+				{
+					cenzor=true;
+					flag=false;
+					 $('.message').prepend('&nbsp;&nbsp;В тексте вашего комментария замечены внешние ссылки. Любые внешние ссылки считаются попыткой рассылки спама.<br>' +
                             'Это противоречит правилам.<br>' +
                             'Дальнейшие нарушения могут повлечь за собой бан.<br><br>');
-                    }
-                    if (html.indexOf('2') + 1) {
-                        $.ajax({
-                            url: "new_breach.php",
-                            async: false,
-                            type: "POST",
-                            success: function (data) {
-                                if (data=='1'){
-                                    location.reload();
-                                }
-                            }
-                        });
-                        censor = true;
-                        $('.message').prepend('&nbsp;&nbsp;В тексте вашего комментария замечена нецензурная лексика.<br>' +
+							//добавить очистку формы и переделать сообщение 
+				}
+				if (comment.indexOf(mat[i])!=-1)
+				{
+					cenzor=true;
+					flag=false;
+					$('.message').prepend('&nbsp;&nbsp;В тексте вашего комментария замечена нецензурная лексика.<br>' +
                             'Это противоречит правилам.<br>' +
                             'Дальнейшие нарушения могут повлечь за собой бан.<br><br>');
-                    }
-                }
-            });
+							//добавить очистку формы и переделать сообщение 
+				}
+			}
 
-            if (!censor) {
-                $.ajax({
-                    url: "new-comment.php",
-                    async: false,
-                    type: "POST",
-                    data: {name: name, comment: comment},
-                    dataType: "json",
-                    success: function (data) {
-                        id = data[0].id;
-                        name = data[0].name;
-                        comment = data[0].comment;
-                        date = data[0].date;
-                    }
-                });
-
+            if (flag) {	
                 $('.comments').prepend('<div class="comment" id="' + id + '">' +
                     '<div class="name">' + name + '</div><hr>' +
                     '<div class="comment-text">&nbsp;&nbsp;&nbsp;&nbsp;' + comment + '</div>' +
@@ -94,16 +54,11 @@ var main = function() {
 
                 id_now++;
             }
+			flag=true;
         }
     });
     setInterval(function(){
-        $.ajax({
-            url: "add-new-note.php",
-            async: false,
-            success: function(html){
-                last_id = html;
-            }
-        });
+    
 
         if (last_id>id_now){
             for (id_now = (id_now+1); id_now<=last_id; id_now++){
