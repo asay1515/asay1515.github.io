@@ -8,6 +8,7 @@
     <title>Цензор-бот</title>
     <link href="style.css" rel="stylesheet" type="text/css">
     <script src="jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="jquery.blockUI.js"></script>
 </head>
     <style>
      .box {
@@ -28,8 +29,8 @@
     </div>
     <div style="color: #d00; font-size: 21px; margin: 1em 0 0 2em;">Напишите комментарий:</div>
     <div class="comment-form">
-        Имя: <input type="text" class="name-input"><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea class="comment-input"></textarea><br>
+        Имя: <input id="name" type="text" class="name-input"><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="comm" class="comment-input" ></textarea><br>
             <input value="OK" type="submit" class="input-submit"/>
     </div>
     <div class="message"></div>
