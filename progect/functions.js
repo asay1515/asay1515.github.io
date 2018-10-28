@@ -17,7 +17,7 @@ var main = function() {
             alert('Вам запрещено пользоваться комментариями ' +
                 ' вследствие многократного нарушения правил с вашей стороны.' +
                 ' Через некоторое время запрет может быть снят.Подумайте над своим поведением!!!');
-document.location.href = "https://asay1515.github.io/progect/ban.html";
+			document.location.href = "https://asay1515.github.io/progect/ban.html";
         } else {
             $('.message').empty();
 

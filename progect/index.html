@@ -7,8 +7,7 @@
 
     <title>Цензор-бот</title>
     <link href="style.css" rel="stylesheet" type="text/css">
-    <script src="jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="jquery.blockUI.js"></script>
+	  <script src="jquery-1.11.3.min.js"></script>
 </head>
     <style>
      .box {
@@ -31,12 +30,12 @@
     <div class="comment-form">
         Имя: <input id="name" type="text" class="name-input"><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="comm" class="comment-input" ></textarea><br>
-            <input value="OK" type="submit" class="input-submit"/>
+            <input id="OK" value="OK" type="submit" class="input-submit"/>
     </div>
     <div class="message"></div>
     <br>
     <div class="comments">
-        <?php require('show-comments.php'); ?>
+
     </div>
     <script src="functions.js"></script>
 </body>
