@@ -1,0 +1,51 @@
+<html>
+<head>
+
+    <?php
+        if (isset($_GET['comment-unput']))
+    ?>
+
+    <title>Цензор-бот</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+	  <script src="jquery-1.11.3.min.js"></script>
+</head>
+    <style>
+     .box {
+	width: 400px;
+	margin-left: 50px ;
+	background: #acd7e5;
+	border: 1px solid red;
+	padding: 4px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 0px 10px #ddd;
+	-webkit-box-shadow: 0px 0px 10px #ddd;
+	#footer{
+	border-top:thin solid #aeaed4;
+	padding-top:10px;
+	color:#333333
+	font-size:.75em;
+	font-style:italic;
+	}
+    </style>
+<body>
+    <div class="box">
+	    <p style="color:red" align="center">WARNING!!!!!!</p>
+        <p>Осталось чуть-чуть доработать и будет вам ЦЕНЗОР-БОТ!!!</p>
+    </div>
+    <div style="color: #d00; font-size: 21px; margin: 1em 0 0 2em;">Напишите комментарий:</div>
+    <div class="comment-form">
+        Имя: <input id="name" type="text" class="name-input"><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="comm" class="comment-input" ></textarea><br>
+            <input id="OK" value="OK" type="submit" class="input-submit"/>
+    </div>
+    <div class="message"></div>
+    <br>
+    <div class="comments">
+    </div>
+	<div class="footer">
+	© Copyright 2018 "Несупер Бобры"
+	</div>
+    <script src="functions.js"></script>
+</body>
+</html>
