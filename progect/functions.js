@@ -73,7 +73,6 @@ var main = function() {
                 $('.comments').prepend('<div class="comment" id="' + id + '">' +
                     '<div class="name">' + name + '</div><hr>' +
                     '<div class="comment-text">&nbsp;&nbsp;&nbsp;&nbsp;' + comment + '</div>' +
-                    '<div class="date">' + date + '</div>' +
                     '</div>');
             }
         }
